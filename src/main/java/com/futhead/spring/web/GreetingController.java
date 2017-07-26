@@ -1,4 +1,4 @@
-package com.futhead.spring;
+package com.futhead.spring.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
