@@ -1,6 +1,7 @@
 package com.futhead.spring.api;
 
 import com.futhead.spring.domain.User;
+import com.futhead.spring.exception.MyException;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -18,6 +19,16 @@ public class UserController {
     private static final String SUCCESS = "success";
 
     private static Map<Long, User> users = Collections.synchronizedMap(new HashMap<Long, User>());
+
+    @GetMapping("/json")
+    public String json() throws MyException {
+        throw new MyException("发生错误2");
+    }
+
+    @GetMapping("/hello")
+    public String hello(@RequestParam String name) {
+        return "Hello" + name;
+    }
 
     @ApiOperation(value = "获取用户列表")
     @GetMapping("/")

@@ -1,7 +1,9 @@
 package com.futhead.spring.exception;
 
+import com.futhead.spring.dto.ErrorInfo;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +23,16 @@ public class GlobalExceptionHandler {
         mav.addObject("url", request.getRequestURL());
         mav.setViewName("error");
         return mav;
+    }
+
+    @ExceptionHandler(value = MyException.class)
+    public @ResponseBody ErrorInfo<String> jsonErrorHandler(HttpServletRequest request, MyException e) throws Exception {
+        ErrorInfo<String> errorInfo = new ErrorInfo<>();
+        errorInfo.setMessage(e.getMessage());
+        errorInfo.setCode(ErrorInfo.ERROR);
+        errorInfo.setData("API 请求异常");
+        errorInfo.setUrl(request.getRequestURL().toString());
+        return errorInfo;
     }
 
 }
