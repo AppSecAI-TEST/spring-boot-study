@@ -1,7 +1,6 @@
 package com.futhead.spring.dao;
 
 import com.futhead.spring.domain.User;
-import org.apache.ibatis.annotations.Select;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by futhead on 2017-7-28.
@@ -41,5 +42,30 @@ public class UserMapperTest {
         }
     }
 
+    @Test
+    public void testUpdate() throws Exception {
+        User user = new User("futhead", 27);
+        userMapper.update(user);
+    }
+
+    @Test
+    public void testDelete() throws Exception {
+        userMapper.delete(2L);
+    }
+
+    @Test
+    public void testInsertByMap() throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", "Hello");
+        map.put("age", 33L);
+        userMapper.insertByMap(map);
+    }
+
+    @Test
+    public void testUserQuery() throws Exception {
+        User user = new User("futhead", 28);
+        List<User> users = userMapper.userQuery(user);
+        System.out.println(users.size());
+    }
 
 }
