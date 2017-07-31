@@ -26,7 +26,7 @@ public interface UserMapper {
      */
     @Results({
             @Result(property = "name", column = "name"),
-            @Result(property = "age", column = "age")
+            @Result(property = "age", column = "age"),
     })
     @Select("SELECT NAME, AGE FROM USER")
     List<User> findAll();
